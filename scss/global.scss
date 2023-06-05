@@ -125,6 +125,7 @@ body{
     overflow: hidden;
     background-color: #ffffff;
     z-index: 100;
+    margin-bottom: 15px;
     filter: drop-shadow(6px 5px 19px rgba(0, 0, 0, 0.199));
     #slide-main-image{
         position: absolute;
@@ -184,6 +185,7 @@ body{
     align-items: center;
     flex-direction: row;
     gap: 5px;
+    user-select: none;
     span{
         position: relative;
         font-size: 15px;

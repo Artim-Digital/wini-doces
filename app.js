@@ -124,7 +124,7 @@ function corrousel(){
     
         console.log(text)
     
-        // window.location.href = `https://api.whatsapp.com/send?phone=558182819265&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
+        window.location.href = `https://api.whatsapp.com/send?phone=558182819265&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
     })
 }
 
