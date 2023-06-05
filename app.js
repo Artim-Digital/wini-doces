@@ -25,6 +25,8 @@ const goInstagram = document.getElementById("go-instagram");
 
 const loadingContainer = document.getElementById("loading-container");
 
+const counterLabel = document.getElementById("counter-label");
+
 const products = [
     {
         name: "Brigadeiro",
@@ -83,7 +85,17 @@ function corrousel(){
         slideMainContainer.style.animation = "slideLeft 0.1s linear";
         setTimeout(() => {
             slideMainContainer.style.animation = "";
-        }, 200);
+        }, 200); 
+        carrouselStep--;
+        if ( carrouselStep < products.length  ){
+            carrouselStep = 2;
+        }
+        carrouselMainImage.src = products[carrouselStep].image;
+        carrouselLeftImage.src = products[carrouselStep].image;
+        carrouselRightImage.src = products[carrouselStep].image;
+        orderOuput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
+        orderCounter.textContent = products[carrouselStep].minCount;
+        orderValue.textContent = `R$ ${products[carrouselStep].value},00`;
     });
 
     let currentValue = parseInt(products[carrouselStep].minCount);
