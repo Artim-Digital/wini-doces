@@ -16,27 +16,36 @@ const orderValuePrevious = document.getElementById("order-value-previous");
 
 const valueLabel = document.querySelector(".value-label");
 
+const goOrder = document.getElementById("go-order");
+
+const slideMainContainer = document.getElementById("slide-main-image-container");
+
+const goWhatsapp = document.getElementById("go-whatsapp");
+const goInstagram = document.getElementById("go-instagram");
+
+const loadingContainer = document.getElementById("loading-container");
+
 const products = [
     {
         name: "Brigadeiro",
-        image: "https://ik.imagekit.io/artim/image_1.png?updatedAt=1685961484507",
+        image: "https://avidadoce.com/wp-content/uploads/2020/05/brigadeiros-gourmet-e1590075452121.jpg",
         minCount: "04",
-        maxCount: "100",
+        maxCount: "30",
         value: "10"
     },
     {
         name: "Pudim",
-        image: "https://ik.imagekit.io/artim/pudim-img-wini.png?updatedAt=1685965485229",
+        image: "https://tradicionalbolosetortas.com.br/wp-content/uploads/2018/12/linha-zero-acucar-mini-pudim-gourmet-diet.jpg",
         minCount: "01",
-        maxCount: "100",
-        value: "00"
+        maxCount: "20",
+        value: "02"
     },
     {
         name: "Bem casado",
-        image: "https://ik.imagekit.io/artim/Bem-Casado-05.png?updatedAt=1685966512244",
+        image: "https://t1.uc.ltmcdn.com/pt/posts/2/4/0/como_fazer_bem_casado_20042_orig.jpg",
         minCount: "04",
-        maxCount: "100",
-        value: "02"
+        maxCount: "20",
+        value: "10"
     }
 ]
 
@@ -53,6 +62,10 @@ function corrousel(){
     orderOuput.innerHTML = `Encomendar <b>${products[0].name}</b> via <b>WhatsApp</b>`;
 
     carrouselNext.addEventListener("click",function(){ 
+        slideMainContainer.style.animation = "slideRight 0.1s linear";
+        setTimeout(() => {
+            slideMainContainer.style.animation = "";
+        }, 200);
         carrouselStep++;
         if ( carrouselStep > products.length -1 ){
             carrouselStep = 0;
@@ -67,33 +80,64 @@ function corrousel(){
     });
 
     carrouselPrevious.addEventListener("click",function(){
-
+        slideMainContainer.style.animation = "slideLeft 0.1s linear";
+        setTimeout(() => {
+            slideMainContainer.style.animation = "";
+        }, 200);
     });
 
     let currentValue = parseInt(products[carrouselStep].minCount);
     let minValue = parseInt(products[carrouselStep].minCount);
     let maxValue = parseInt(products[carrouselStep].maxCount);
 
+
     function productCounter() {
-    let doubledValue = 2 * currentValue;
+        let doubledValue = 2 * currentValue;
         if (doubledValue <= maxValue) {
             currentValue = doubledValue;
         }
         orderCounter.textContent = currentValue.toString().padStart(2, "0");
     }
-
+    
     function halveValue() {
         let halvedValue = currentValue / 2;
         if (halvedValue >= minValue) {
             currentValue = halvedValue;
         }
         orderCounter.textContent = currentValue.toString().padStart(2, "0");
-    }
+    } 
 
     orderValueNext.addEventListener("click", productCounter);
     orderValuePrevious.addEventListener("click", halveValue);
-}
- 
 
+
+
+    goOrder.addEventListener("click",function(){ 
+
+        let getProductName = products[carrouselStep].name;
+        let getProductUnits = orderCounter.textContent;
+        let getOrderValue = orderValue.textContent;
+
+        const text = `Olá, Gostaria de ${getProductUnits} unidades de ${getProductName} - ${getOrderValue}`; 
+    
+        let textToLink = text.replace(/\s/g, "%20");
+    
+        console.log(text)
+    
+        // window.location.href = `https://api.whatsapp.com/send?phone=558182819265&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
+    })
+}
+
+goInstagram.addEventListener("click",function(){
+    window.location.href = `https://www.instagram.com/wini.docinhos/`;
+})
+
+goWhatsapp.addEventListener("click",function(){
+    window.location.href = `https://api.whatsapp.com/send?phone=558182819265`;
+})
 
 corrousel();
+
+setTimeout(() => {
+    loadingContainer.style.display = "none";
+}, 3000);  
