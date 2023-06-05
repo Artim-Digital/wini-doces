@@ -1,0 +1,322 @@
+* {
+  font-family: arial;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background-color: #D6CDC8;
+  background-image: url("https://ik.imagekit.io/artim/birgadeiro_-_Copia_2_.png?updatedAt=1685974859826");
+  background-repeat: repeat;
+  background-size: 60px;
+  overflow-x: hidden;
+}
+
+#loading-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #D6CDC8;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #D6CDC8;
+  background-image: url("https://ik.imagekit.io/artim/birgadeiro_-_Copia_2_.png?updatedAt=1685974859826");
+  background-repeat: repeat;
+  background-size: 60px;
+  z-index: 1000;
+}
+
+.logo-shape {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  animation: logoshape 7s linear infinite;
+}
+
+.logo-name {
+  position: absolute;
+  width: 55%;
+  z-index: 10;
+  margin-right: 5px;
+}
+
+.logo-shape-container {
+  position: absolute;
+  width: 70%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes logoshape {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.logo {
+  position: relative;
+  width: 40%;
+  margin-top: 20px;
+}
+
+#slide-container {
+  position: relative;
+  width: 90%;
+  height: 300px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#slide-container #slide-previous {
+  position: absolute;
+  left: -14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: none;
+  border: none;
+  outline: none;
+}
+#slide-container #slide-previous i {
+  position: absolute;
+  font-size: 40px;
+  color: #482B14;
+}
+#slide-container #slide-next {
+  position: absolute;
+  right: -14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: none;
+  border: none;
+  outline: none;
+}
+#slide-container #slide-next i {
+  position: absolute;
+  font-size: 40px;
+  color: #482B14;
+}
+
+#slide-main-image-container {
+  position: absolute;
+  height: 90%;
+  width: 80%;
+  border: 2px solid #482B14;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #ffffff;
+  z-index: 100;
+  filter: drop-shadow(6px 5px 19px rgba(0, 0, 0, 0.199));
+}
+#slide-main-image-container #slide-main-image {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#slide-left-image-container {
+  position: absolute;
+  height: 70%;
+  width: 200px;
+  border: 2px solid #482B14;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin-right: 110px;
+}
+#slide-left-image-container #slide-left-image {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#slide-right-image-container {
+  position: absolute;
+  height: 70%;
+  width: 200px;
+  border: 2px solid #482B14;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin-left: 110px;
+}
+#slide-right-image-container #slide-right-image {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#go-order {
+  position: relative;
+  width: 90%;
+  background-color: #482B14;
+  border: 2px solid #482B14;
+  border-radius: 50px;
+  height: 45px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}
+#go-order span {
+  position: relative;
+  font-size: 15px;
+  font-weight: initial;
+  color: #ffffff;
+}
+#go-order i {
+  position: relative;
+  color: #ffffff;
+  font-size: 20px;
+}
+#go-order:active {
+  background: none;
+  border: 2px solid #482B14;
+}
+#go-order:active span {
+  color: #482B14;
+}
+#go-order:active i {
+  color: #482B14;
+}
+
+.custom-order {
+  position: relative;
+  width: 90%;
+  height: 70px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-order .counter-label {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #482B14;
+}
+.custom-order .value-label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #482B14;
+}
+
+.order-counter-input-container {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border: 2px solid #482B14;
+  border-radius: 50px;
+  background-color: #ffffff;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order-counter-input-container #order-counter {
+  position: absolute;
+  left: 43px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #482B14;
+}
+.order-counter-input-container #order-value {
+  position: absolute;
+  right: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #482B14;
+}
+
+#order-value-previous {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: none;
+  border: none;
+  outline: none;
+}
+#order-value-previous i {
+  position: absolute;
+  font-size: 40px;
+  color: #482B14;
+}
+
+#order-value-next {
+  position: absolute;
+  left: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: none;
+  border: none;
+  outline: none;
+}
+#order-value-next i {
+  position: absolute;
+  font-size: 40px;
+  color: #482B14;
+}
+
+.social-media-container {
+  position: relative;
+  width: auto;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 30px;
+}
+.social-media-container button {
+  position: relative;
+  background: none;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.social-media-container button i {
+  position: absolute;
+  position: relative;
+  font-size: 30px;
+  color: #482B14;
+}
+
+/*# sourceMappingURL=global.css.map */
