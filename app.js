@@ -33,16 +33,8 @@ const products = [
     image: "https://tradicionalbolosetortas.com.br/wp-content/uploads/2018/12/linha-zero-acucar-mini-pudim-gourmet-diet.jpg",
     minCount: "01",
     maxCount: "20",
-    value: "05",
+    value: "02",
     amount : "1"
-  },
-  {
-    name: "Bem casado",
-    image: "https://t1.uc.ltmcdn.com/pt/posts/2/4/0/como_fazer_bem_casado_20042_orig.jpg",
-    minCount: "01",
-    maxCount: "20",
-    value: "10",
-    amount : "4"
   },
   {
     name: "Bolo de pote",
