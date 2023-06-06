@@ -25,28 +25,32 @@ const products = [
     image: "https://avidadoce.com/wp-content/uploads/2020/05/brigadeiros-gourmet-e1590075452121.jpg",
     minCount: "01",
     maxCount: "30",
-    value: "10"
+    value: "10",
+    amount : "4"
   },
   {
     name: "Pudim",
     image: "https://tradicionalbolosetortas.com.br/wp-content/uploads/2018/12/linha-zero-acucar-mini-pudim-gourmet-diet.jpg",
     minCount: "01",
     maxCount: "20",
-    value: "02"
+    value: "05",
+    amount : "1"
   },
   {
     name: "Bem casado",
     image: "https://t1.uc.ltmcdn.com/pt/posts/2/4/0/como_fazer_bem_casado_20042_orig.jpg",
     minCount: "01",
     maxCount: "20",
-    value: "10"
+    value: "10",
+    amount : "4"
   },
   {
     name: "Bolo de pote",
     image: "https://static.itdg.com.br/images/1200-675/bfbc5532e36840b2a57e3849d82ad7a5/355179-original.jpg",
     minCount: "01",
     maxCount: "100",
-    value: "05"
+    value: "05",
+    amount : "1"
   }
 ];
 
@@ -72,11 +76,17 @@ function updateCarousel(direction) {
     } else {
         carrouselStep = (carrouselStep - 1 + products.length) % products.length;
     }
+
+    const productAmount = parseInt(products[carrouselStep].amount)
+    let units = "Unidade";
+    if ( productAmount > 1){
+      units = "Unidades"
+    }
   carrouselMainImage.src = products[carrouselStep].image;
   carrouselLeftImage.src = products[carrouselStep].image;
   carrouselRightImage.src = products[carrouselStep].image;
   orderOutput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
-  productLabel.textContent = products[carrouselStep].name;
+  productLabel.textContent = `${products[carrouselStep].name} • ${products[carrouselStep].amount} ${units}`;
   orderCounter.textContent = products[carrouselStep].minCount;
   orderValue.textContent = `R$ ${products[carrouselStep].value},00`;
 }
@@ -85,42 +95,24 @@ function productCounter(increase) {
   const minValue = parseInt(products[carrouselStep].minCount);
   const maxValue = parseInt(products[carrouselStep].maxCount);
   let currentValue = parseInt(orderCounter.textContent);
-
-  let valueFormattedi,valueFormatted;
+  let currentProductValue = parseInt(orderValue.textContent.match(/\d{2}/)[0]);
 
   if (increase) {
-    currentValue *= 2;
+    currentValue++;
+    currentProductValue += parseInt(products[carrouselStep].value);
     if (currentValue > maxValue) {
       currentValue = maxValue;
-      valueFormattedi = valueFormattedi;
+      currentProductValue = currentProductValue;
     }
   } else {
-    currentValue /= 2;
-    if (currentValue < minValue) {
+    currentValue--;
+    currentProductValue -= parseInt(products[carrouselStep].value);;
+    if (currentValue < minValue) { 
       currentValue = minValue;
-      valueFormatted = valueFormatted;
+      currentProductValue = currentProductValue;
     }
   }
-
-  function addValue() {
-    let productCurrentValue = orderValue.textContent;
-     valueFormattedi = parseInt(productCurrentValue.match(/\d{2}/)[0]);
-    valueFormattedi = valueFormattedi * 2;
-    orderValue.textContent = `R$ ${valueFormattedi},00`;
-    console.log(valueFormattedi);
-} 
-
-function removeValue() {
-    let productCurrentValue = orderValue.textContent;
-     valueFormatted = parseInt(productCurrentValue.match(/\d{2}/)[0]);
-    valueFormatted = valueFormatted / 2;
-    orderValue.textContent = `R$ ${valueFormatted},00`; 
-    console.log(valueFormatted);
-}
-  
-orderValueNext.addEventListener("click", () => addValue()); 
-orderValuePrevious.addEventListener("click", () => removeValue());
-
+  orderValue.textContent = `R$ ${currentProductValue},00`;
   orderCounter.textContent = currentValue.toString().padStart(2, "0");
 }
 
@@ -137,7 +129,7 @@ function goToOrder() {
   const textToLink = encodeURIComponent(text);
   const whatsappLink = `https://api.whatsapp.com/send?phone=${cellNumber}&text=${textToLink}`;
   console.log(whatsappLink)
-//   window.location.href = whatsappLink;
+  window.location.href = whatsappLink;
 }
 
 function goToInstagram() {
@@ -164,4 +156,5 @@ goOrder.addEventListener("click", goToOrder);
 goInstagram.addEventListener("click", goToInstagram);
 goWhatsapp.addEventListener("click", goToWhatsApp);
 setTimeout(hideLoadingContainer, 3000);
+
 initializeCarousel();
