@@ -1,6 +1,6 @@
 {
     "name": "Wini Doces",
-    "short_name": "wini",
+    "short_name": "Wini Doces",
     "theme_color": "#452811",
     "background_color": "#452811",
     "display": "standalone",
@@ -48,5 +48,6 @@
         "type": "image/png"
       }
     ],
-    "splash_pages": null
+    "splash_pages": null,
+    "description": "Wini Doces - Doces Artesanais"
   }
