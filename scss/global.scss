@@ -112,6 +112,7 @@ body{
     position: relative;
     width: 90%;
     height: 300px;
+    min-height: 300px;
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -241,7 +242,8 @@ body{
     border: 2px solid #482B14;
     border-radius: 50px;
     height: 45px;
-    margin-top: 15px;
+    min-height: 45px;
+    margin-top: 7px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -274,7 +276,8 @@ body{
 .custom-order{
     position: relative;
     width: 90%;
-    height: 90px;
+    height: 120px;
+    min-height: 70px;
     margin-top: 5px;
     display: flex;
     justify-content: center;
