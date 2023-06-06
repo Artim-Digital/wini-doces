@@ -48,6 +48,13 @@ const products = [
         minCount: "04",
         maxCount: "20",
         value: "10"
+    },
+    {
+        name: "Bolo de pote",
+        image: "https://static.itdg.com.br/images/1200-675/bfbc5532e36840b2a57e3849d82ad7a5/355179-original.jpg",
+        minCount: "01",
+        maxCount: "10",
+        value: "05"
     }
 ]
 
@@ -131,12 +138,13 @@ function corrousel(){
         let getOrderValue = orderValue.textContent;
 
         const text = `Olá, Gostaria de ${getProductUnits} unidades de ${getProductName} - ${getOrderValue}`; 
+        const cellNumber = "558182819265";
     
         let textToLink = text.replace(/\s/g, "%20");
     
         console.log(text)
     
-        window.location.href = `https://api.whatsapp.com/send?phone=558182819265&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
+        window.location.href = `https://api.whatsapp.com/send?phone=${cellNumber}&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
     })
 }
 
