@@ -1,163 +1,167 @@
-
 const carrouselNext = document.getElementById("slide-next");
 const carrouselPrevious = document.getElementById("slide-previous");
-
 const carrouselMainImage = document.getElementById("slide-main-image");
 const carrouselLeftImage = document.getElementById("slide-left-image");
 const carrouselRightImage = document.getElementById("slide-right-image");
-
-const orderOuput = document.getElementById("order-output");
-
+const orderOutput = document.getElementById("order-output");
 const orderCounter = document.getElementById("order-counter");
 const orderValue = document.getElementById("order-value");
-
 const orderValueNext = document.getElementById("order-value-next");
 const orderValuePrevious = document.getElementById("order-value-previous");
-
 const valueLabel = document.querySelector(".value-label");
-
 const goOrder = document.getElementById("go-order");
-
 const slideMainContainer = document.getElementById("slide-main-image-container");
-
 const goWhatsapp = document.getElementById("go-whatsapp");
 const goInstagram = document.getElementById("go-instagram");
-
 const loadingContainer = document.getElementById("loading-container");
-
 const counterLabel = document.getElementById("counter-label");
-
+const type = document.querySelector(".type");
+const logo = document.querySelector(".logo");
+const productLabel = document.getElementById("product-label");
+ 
 const products = [
-    {
-        name: "Brigadeiro",
-        image: "https://avidadoce.com/wp-content/uploads/2020/05/brigadeiros-gourmet-e1590075452121.jpg",
-        minCount: "04",
-        maxCount: "30",
-        value: "10"
-    },
-    {
-        name: "Pudim",
-        image: "https://tradicionalbolosetortas.com.br/wp-content/uploads/2018/12/linha-zero-acucar-mini-pudim-gourmet-diet.jpg",
-        minCount: "01",
-        maxCount: "20",
-        value: "02"
-    },
-    {
-        name: "Bem casado",
-        image: "https://t1.uc.ltmcdn.com/pt/posts/2/4/0/como_fazer_bem_casado_20042_orig.jpg",
-        minCount: "04",
-        maxCount: "20",
-        value: "10"
-    },
-    {
-        name: "Bolo de pote",
-        image: "https://static.itdg.com.br/images/1200-675/bfbc5532e36840b2a57e3849d82ad7a5/355179-original.jpg",
-        minCount: "01",
-        maxCount: "10",
-        value: "05"
-    }
-]
-
-const orderValuerProperties = orderValue.getBoundingClientRect();
-valueLabel.style.width = orderValuerProperties.width + 10 + "px";
+  {
+    name: "Brigadeiro",
+    image: "https://avidadoce.com/wp-content/uploads/2020/05/brigadeiros-gourmet-e1590075452121.jpg",
+    minCount: "01",
+    maxCount: "30",
+    value: "10"
+  },
+  {
+    name: "Pudim",
+    image: "https://tradicionalbolosetortas.com.br/wp-content/uploads/2018/12/linha-zero-acucar-mini-pudim-gourmet-diet.jpg",
+    minCount: "01",
+    maxCount: "20",
+    value: "02"
+  },
+  {
+    name: "Bem casado",
+    image: "https://t1.uc.ltmcdn.com/pt/posts/2/4/0/como_fazer_bem_casado_20042_orig.jpg",
+    minCount: "01",
+    maxCount: "20",
+    value: "10"
+  },
+  {
+    name: "Bolo de pote",
+    image: "https://static.itdg.com.br/images/1200-675/bfbc5532e36840b2a57e3849d82ad7a5/355179-original.jpg",
+    minCount: "01",
+    maxCount: "100",
+    value: "05"
+  }
+];
 
 let carrouselStep = 0;
 
-function corrousel(){ 
-
-    carrouselMainImage.src = products[0].image;
-    carrouselLeftImage.src = products[1].image;
-    carrouselRightImage.src = products[2].image;
-    orderOuput.innerHTML = `Encomendar <b>${products[0].name}</b> via <b>WhatsApp</b>`;
-
-    carrouselNext.addEventListener("click",function(){ 
-        slideMainContainer.style.animation = "slideRight 0.1s linear";
-        setTimeout(() => {
-            slideMainContainer.style.animation = "";
-        }, 200);
-        carrouselStep++;
-        if ( carrouselStep > products.length -1 ){
-            carrouselStep = 0;
-        }
-        carrouselMainImage.src = products[carrouselStep].image;
-        carrouselLeftImage.src = products[carrouselStep].image;
-        carrouselRightImage.src = products[carrouselStep].image;
-        orderOuput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
-        orderCounter.textContent = products[carrouselStep].minCount;
-        orderValue.textContent = `R$ ${products[carrouselStep].value},00`; 
-
-    });
-
-    carrouselPrevious.addEventListener("click",function(){
-        slideMainContainer.style.animation = "slideLeft 0.1s linear";
-        setTimeout(() => {
-            slideMainContainer.style.animation = "";
-        }, 200); 
-        carrouselStep--;
-        if ( carrouselStep < products.length  ){
-            carrouselStep = 2;
-        }
-        carrouselMainImage.src = products[carrouselStep].image;
-        carrouselLeftImage.src = products[carrouselStep].image;
-        carrouselRightImage.src = products[carrouselStep].image;
-        orderOuput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
-        orderCounter.textContent = products[carrouselStep].minCount;
-        orderValue.textContent = `R$ ${products[carrouselStep].value},00`;
-    });
-
-    let currentValue = parseInt(products[carrouselStep].minCount);
-    let minValue = parseInt(products[carrouselStep].minCount);
-    let maxValue = parseInt(products[carrouselStep].maxCount);
-
-
-    function productCounter() {
-        let doubledValue = 2 * currentValue;
-        if (doubledValue <= maxValue) {
-            currentValue = doubledValue;
-        }
-        orderCounter.textContent = currentValue.toString().padStart(2, "0");
-    }
-    
-    function halveValue() {
-        let halvedValue = currentValue / 2;
-        if (halvedValue >= minValue) {
-            currentValue = halvedValue;
-        }
-        orderCounter.textContent = currentValue.toString().padStart(2, "0");
-    } 
-
-    orderValueNext.addEventListener("click", productCounter);
-    orderValuePrevious.addEventListener("click", halveValue);
-
-
-
-    goOrder.addEventListener("click",function(){ 
-
-        let getProductName = products[carrouselStep].name;
-        let getProductUnits = orderCounter.textContent;
-        let getOrderValue = orderValue.textContent;
-
-        const text = `Olá, Gostaria de ${getProductUnits} unidades de ${getProductName} - ${getOrderValue}`; 
-        const cellNumber = "558182819265";
-    
-        let textToLink = text.replace(/\s/g, "%20");
-    
-        console.log(text)
-    
-        window.location.href = `https://api.whatsapp.com/send?phone=${cellNumber}&text=Ol%C3%A1%2C%20${textToLink}%0A%0A`;
-    })
+function initializeCarousel() {
+  carrouselMainImage.src = products[carrouselStep].image;
+  carrouselLeftImage.src = products[carrouselStep].image;
+  carrouselRightImage.src = products[carrouselStep].image;
+  orderOutput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
+  orderCounter.textContent = products[carrouselStep].minCount;
+  orderValue.textContent = `R$ ${products[carrouselStep].value},00`;
 }
 
-goInstagram.addEventListener("click",function(){
-    window.location.href = `https://www.instagram.com/wini.docinhos/`;
-})
+function updateCarousel(direction) {
+  const animationClass = direction === "next" ? "slideRight" : "slideLeft";
+  slideMainContainer.style.animation = `${animationClass} 0.1s linear`;
+  setTimeout(() => {
+      slideMainContainer.style.animation = "";
+    }, 200);
+    if (direction === "next") {
+        carrouselStep = (carrouselStep + 1) % products.length;
+    } else {
+        carrouselStep = (carrouselStep - 1 + products.length) % products.length;
+    }
+  carrouselMainImage.src = products[carrouselStep].image;
+  carrouselLeftImage.src = products[carrouselStep].image;
+  carrouselRightImage.src = products[carrouselStep].image;
+  orderOutput.innerHTML = `Encomendar <b>${products[carrouselStep].name}</b> via <b>WhatsApp</b>`;
+  productLabel.textContent = products[carrouselStep].name;
+  orderCounter.textContent = products[carrouselStep].minCount;
+  orderValue.textContent = `R$ ${products[carrouselStep].value},00`;
+}
 
-goWhatsapp.addEventListener("click",function(){
-    window.location.href = `https://api.whatsapp.com/send?phone=558182819265`;
-})
+function productCounter(increase) {
+  const minValue = parseInt(products[carrouselStep].minCount);
+  const maxValue = parseInt(products[carrouselStep].maxCount);
+  let currentValue = parseInt(orderCounter.textContent);
 
-corrousel();
+  let valueFormattedi,valueFormatted;
 
-setTimeout(() => {
-    loadingContainer.style.display = "none";
-}, 3000);  
+  if (increase) {
+    currentValue *= 2;
+    if (currentValue > maxValue) {
+      currentValue = maxValue;
+      valueFormattedi = valueFormattedi;
+    }
+  } else {
+    currentValue /= 2;
+    if (currentValue < minValue) {
+      currentValue = minValue;
+      valueFormatted = valueFormatted;
+    }
+  }
+
+  function addValue() {
+    let productCurrentValue = orderValue.textContent;
+     valueFormattedi = parseInt(productCurrentValue.match(/\d{2}/)[0]);
+    valueFormattedi = valueFormattedi * 2;
+    orderValue.textContent = `R$ ${valueFormattedi},00`;
+    console.log(valueFormattedi);
+} 
+
+function removeValue() {
+    let productCurrentValue = orderValue.textContent;
+     valueFormatted = parseInt(productCurrentValue.match(/\d{2}/)[0]);
+    valueFormatted = valueFormatted / 2;
+    orderValue.textContent = `R$ ${valueFormatted},00`; 
+    console.log(valueFormatted);
+}
+  
+orderValueNext.addEventListener("click", () => addValue()); 
+orderValuePrevious.addEventListener("click", () => removeValue());
+
+  orderCounter.textContent = currentValue.toString().padStart(2, "0");
+}
+
+function goToOrder() {
+  const productName = products[carrouselStep].name;
+  const productUnits = orderCounter.textContent;
+  const orderValueText = orderValue.textContent;
+  let single = "unidade";
+  if (productUnits > 1){
+    single = "unidades"
+  }
+  const text = `Gostaria de ${productUnits} ${single} de ${productName} - ${orderValueText}`;
+  const cellNumber = "558182819265";
+  const textToLink = encodeURIComponent(text);
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${cellNumber}&text=${textToLink}`;
+  console.log(whatsappLink)
+//   window.location.href = whatsappLink;
+}
+
+function goToInstagram() {
+  const instagramLink = "https://www.instagram.com/wini.docinhos/";
+  window.location.href = instagramLink;
+}
+
+function goToWhatsApp() {
+  const whatsappLink = "https://api.whatsapp.com/send?phone=558182819265";
+  window.location.href = whatsappLink;
+}
+
+function hideLoadingContainer() {
+  loadingContainer.style.display = "none";
+  type.style.animation = "typeanim 0.3s linear both";
+  logo.style.animation = "logoanim 0.3s linear both";
+} 
+
+carrouselNext.addEventListener("click", () => updateCarousel("next"));
+carrouselPrevious.addEventListener("click", () => updateCarousel("previous")); 
+orderValueNext.addEventListener("click", () => productCounter(true));
+orderValuePrevious.addEventListener("click", () => productCounter(false));
+goOrder.addEventListener("click", goToOrder);
+goInstagram.addEventListener("click", goToInstagram);
+goWhatsapp.addEventListener("click", goToWhatsApp);
+setTimeout(hideLoadingContainer, 3000);
+initializeCarousel();

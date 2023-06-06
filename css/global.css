@@ -5,15 +5,11 @@
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
   background-color: #D6CDC8;
   background-image: url("https://ik.imagekit.io/artim/birgadeiro_-_Copia_2_.png?updatedAt=1685974859826");
   background-repeat: repeat;
   background-size: 60px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #loading-container {
@@ -67,6 +63,43 @@ body {
   position: relative;
   width: 40%;
   margin-top: 20px;
+}
+
+.type {
+  position: absolute;
+  top: 30px;
+  width: 150%;
+  z-index: -1;
+}
+
+@keyframes logoanim {
+  from {
+    width: 30%;
+  }
+  to {
+    width: 40%;
+  }
+}
+@keyframes typeanim {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 30px;
+  }
+}
+#site-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
 }
 
 #slide-container {
@@ -131,6 +164,29 @@ body {
   height: 100%;
   box-sizing: border-box;
 }
+#slide-main-image-container #product-label {
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  background: #482b149d;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: initial;
+  bottom: 10px;
+  z-index: 10;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.bottom-info {
+  position: relative;
+  font-size: 12px !important;
+  margin: 10px;
+  font-size: initial;
+  color: #482B14;
+  width: 90%;
+  text-align: center;
+}
 
 #slide-left-image-container {
   position: absolute;
@@ -149,6 +205,7 @@ body {
   position: absolute;
   height: 100%;
   box-sizing: border-box;
+  filter: blur(4px);
 }
 
 #slide-right-image-container {
@@ -168,6 +225,7 @@ body {
   position: absolute;
   height: 100%;
   box-sizing: border-box;
+  filter: blur(4px);
 }
 
 #go-order {
@@ -210,7 +268,7 @@ body {
 .custom-order {
   position: relative;
   width: 90%;
-  height: 70px;
+  height: 90px;
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -303,10 +361,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 0px;
   padding-bottom: 100px;
   border-top: 1px solid #482b1431;
-  padding-top: 20px;
+  padding-top: 15px;
 }
 .social-media-container button {
   position: relative;
